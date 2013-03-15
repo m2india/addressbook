@@ -1,0 +1,44 @@
+<html>
+<head>
+    <title>Search</title>
+</head>
+<body>
+    {% if errors %}
+        <ul>
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h1>search</h1>
+    <form action="/search/" method="get">
+		{% csrf_token %}
+			{{ error.as_p }}
+		
+			<input type="text" name="q">
+			<input type="submit" value="Search">
+			<input type="reset" value="reset">
+    </form>
+</body>
+</html>
+
+
+<p>You searched for: <strong>{{ query }}</strong></p>
+
+{% if ads %}
+    <p>Found {{ ads|length }} book{{ ads|pluralize }}.</p>
+    <ul>
+        {% for a in ads %}
+        <li><lable> Name: 		 		 {{ a.name }}</li> </lable>
+        <li><lable>Date of Bith:		 {{ a.dateofbirth }} </li></lable>
+        <li><lable> Age: 		         {{ a.address }}</li></lable>
+        <li><lable> PhoneNumber:   	{{ a.phone_number }}</li> </lable>
+        <li><lable> Email: 		 {{ a.email }}</li> </lable>
+        <li><lable> State:  	 {{ a.state }}</li></lable>
+        <li><lable> Country:  	 {{ a.country }}</li></lable>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No books matched your search criteria.</p>
+{% endif %}
+
